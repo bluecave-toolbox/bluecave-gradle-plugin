@@ -81,7 +81,7 @@ class BlueCaveReportPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.tasks.register("bluecaveReport", BlueCaveReportTask::class.java) {
             project.group = "verification"
-            project.description = "Run Blue Cave report across sources, classes, and JaCoCo XMLs."
+            project.description = "Run static analysis and report coverage to Blue Cave"
         }
     }
 }
