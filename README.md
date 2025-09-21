@@ -30,3 +30,9 @@ export BLUECAVE_TOKEN="<your project token>" # Please keep this a secret!
 ```
 
 If you run into any trouble, please open an issue :)
+
+## Contributing
+Pull requests are welcome! For major changes, please open an issue to discuss your change first.
+
+## License
+[MIT](https://github.com/bluecave-toolbox/bluecave-gradle-plugin/blob/main/LICENSE).
