@@ -1,6 +1,7 @@
 # Gradle Plugin for Blue Cave
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Publish to Gradle Plugins](https://github.com/bluecave-toolbox/bluecave-gradle-plugin/actions/workflows/gradle-publish.yml/badge.svg)](https://github.com/bluecave-toolbox/bluecave-gradle-plugin/actions/workflows/gradle-publish.yml)
 
 A Gradle plugin that provides a wrapper for Blue Cave's CLI, making it easier to integrate Blue Cave
 into your Gradle projects.
