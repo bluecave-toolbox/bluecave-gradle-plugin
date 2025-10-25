@@ -26,7 +26,8 @@ You can now use the task `bluecaveReport` to analyse and report coverage to your
 ```shell
 export BLUECAVE_TOKEN="<your project token>" # Please keep this a secret!
 # The following is only required if running outside of GitHub Actions:
-# export BLUECAVE_EXTRA_OPTS="-b <branch name, such as main> -c <commit hash to attribute this analysis to>" 
+# export BLUECAVE_EXTRA_OPTS="-b <branch name, such as main> -c <commit hash to attribute this analysis to>"
+# See https://docs.bluecave.io/languages/java/ for more information. 
 ./gradlew bluecaveReport
 ```
 
