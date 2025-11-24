@@ -22,6 +22,7 @@ abstract class BlueCaveReportTask : DefaultTask() {
 
         val allSources = mutableListOf<Path>()
         val allBuild = mutableListOf<Path>()
+        val allJacocoReports = mutableListOf<Path>()
 
         projects.forEach { p ->
             val sets = p.extensions.findByName("sourceSets") as? SourceSetContainer
@@ -32,6 +33,10 @@ abstract class BlueCaveReportTask : DefaultTask() {
                         allSources.add(rel)
                     }
                 }
+            }
+            val jacocoFile = p.layout.buildDirectory.asFile.get().resolve("reports/jacoco/test/jacocoTestReport.xml")
+            if (jacocoFile.exists()) {
+                allJacocoReports.add(root.toPath().relativize(jacocoFile.toPath()))
             }
         }
 
@@ -46,7 +51,13 @@ abstract class BlueCaveReportTask : DefaultTask() {
         }
 
         var command =
-            "./bluecave -l java -s ${allSources.joinToString(" -s ") { it.toString() }} -x ${allBuild.joinToString(" -x ") { it.toString() }}"
+            "./bluecave -l java " +
+            "-s ${allSources.joinToString(" -s ") { it.toString() }} " +
+                    "-x ${allBuild.joinToString(" -x ") { it.toString() }} "
+
+        if (allJacocoReports.isNotEmpty()) {
+            command += "-j ${allJacocoReports.joinToString(" -j ") { it.toString() }}"
+        }
 
         System.getenv("BLUECAVE_EXTRA_OPTS")?.let {
             command += " $it"
