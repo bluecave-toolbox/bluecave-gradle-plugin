@@ -25,12 +25,21 @@ abstract class BlueCaveReportTask : DefaultTask() {
         val allJacocoReports = mutableListOf<Path>()
 
         projects.forEach { p ->
+
             val sets = p.extensions.findByName("sourceSets") as? SourceSetContainer
             for (f: String in listOf("main", "test")) {
                 sets?.getByName(f)?.allJava?.srcDirs?.forEach {
                     val rel = root.toPath().relativize(it.toPath())
-                    if (it.exists() && !it.toPath().startsWith(p.layout.buildDirectory.asFile.get().toPath())) {
+                    if (it.exists()
+                        && !it.toPath().startsWith(p.layout.buildDirectory.asFile.get().toPath())
+                        && !it.toPath().startsWith(project.layout.buildDirectory.asFile.get().toPath())
+                    ) {
                         allSources.add(rel)
+                    }
+                }
+                sets?.getByName(f)?.output?.classesDirs?.forEach {
+                    if (it.exists()) {
+                        allBuild.add(root.toPath().relativize(it.toPath()))
                     }
                 }
             }
@@ -39,8 +48,6 @@ abstract class BlueCaveReportTask : DefaultTask() {
                 allJacocoReports.add(root.toPath().relativize(jacocoFile.toPath()))
             }
         }
-
-        allBuild.add(Path.of("build/classes/java/main"))
 
         if (allSources.isEmpty()) {
             throw RuntimeException("No source directories found")
@@ -52,7 +59,7 @@ abstract class BlueCaveReportTask : DefaultTask() {
 
         var command =
             "./bluecave -l java " +
-            "-s ${allSources.joinToString(" -s ") { it.toString() }} " +
+                    "-s ${allSources.joinToString(" -s ") { it.toString() }} " +
                     "-x ${allBuild.joinToString(" -x ") { it.toString() }} "
 
         if (allJacocoReports.isNotEmpty()) {
