@@ -11,14 +11,14 @@ Add the plugin to your `build.gradle` file:
 ```groovy
 plugins {
     ...
-    id "io.bluecave.plugin" version "0.1.5"
+    id "io.bluecave.plugin" version "0.1.6"
 }
 ```
 If using Kotlin:
 ```kotlin
 plugins {
     ...
-    id("io.bluecave.plugin") version "0.1.5"
+    id("io.bluecave.plugin") version "0.1.6"
 }
 ```
 

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.bluecave"
-version = "0.1.5"
+version = "0.1.6"
 
 gradlePlugin {
     website = "https://bluecave.io"
