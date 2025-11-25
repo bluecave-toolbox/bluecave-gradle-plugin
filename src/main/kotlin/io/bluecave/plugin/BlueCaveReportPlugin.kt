@@ -29,7 +29,7 @@ abstract class BlueCaveReportTask : DefaultTask() {
             for (f: String in listOf("main", "test")) {
                 sets?.getByName(f)?.allJava?.srcDirs?.forEach {
                     val rel = root.toPath().relativize(it.toPath())
-                    if (it.exists() && !rel.startsWith("build/") && !rel.startsWith("target/")) {
+                    if (it.exists() && !it.toPath().startsWith(p.layout.buildDirectory.asFile.get().toPath())) {
                         allSources.add(rel)
                     }
                 }
